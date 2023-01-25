@@ -1,0 +1,134 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database business;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> shuw databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'shuw databases' at line 1
+mysql> use business;
+Database changed
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| business           |
+| college            |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use business;
+Database changed
+mysql> create table company (id int(5),
+    -> fjf;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create table company (id int(5),custname varchar(10),age int(2),sex varchar(1));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc company;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(5)      | YES  |     | NULL    |       |
+| custname | varchar(10) | YES  |     | NULL    |       |
+| age      | int(2)      | YES  |     | NULL    |       |
+| sex      | varchar(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table company add peimary key (id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key (id)' at line 1
+mysql> alter table company add primary key (id);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc company;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(5)      | NO   | PRI | 0       |       |
+| custname | varchar(10) | YES  |     | NULL    |       |
+| age      | int(2)      | YES  |     | NULL    |       |
+| sex      | varchar(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> create table orders;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table orders(orderid int(5),product varchar(10),cost int(6));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | int(5)      | YES  |     | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table orders add foreign key (orderid) references company (id);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from business;
+ERROR 1146 (42S02): Table 'business.business' doesn't exist
+mysql> select * from orders;
+Empty set (0.00 sec)
+
+mysql> desc ordes;
+ERROR 1146 (42S02): Table 'business.ordes' doesn't exist
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | int(5)      | YES  | MUL | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table company add check(id='1'or'3');
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc company;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(5)      | NO   | PRI | 0       |       |
+| custname | varchar(10) | YES  |     | NULL    |       |
+| age      | int(2)      | YES  |     | NULL    |       |
+| sex      | varchar(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter table orders add unique(cost);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | int(5)      | YES  | MUL | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  | UNI | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
