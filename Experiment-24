@@ -1,0 +1,87 @@
+# CSA-0533DBMS
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 30
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use carcompany;
+Database changed
+mysql> desc carrent;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| carno    | int(10)     | YES  |     | NULL    |       |
+| carcom   | varchar(20) | YES  |     | NULL    |       |
+| color    | varchar(8)  | YES  |     | NULL    |       |
+| rentcost | int(9)      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into carrent values(2432,'TATA','Black',10000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into carrent values(7222,'BMW','White',15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into carrent values(6392,'Volva','Red',17000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from carrent;
++-------+--------+-------+----------+
+| carno | carcom | color | rentcost |
++-------+--------+-------+----------+
+|  2432 | TATA   | Black |    10000 |
+|  7222 | BMW    | White |    15000 |
+|  6392 | Volva  | Red   |    17000 |
++-------+--------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select carcom from carrent;
++--------+
+| carcom |
++--------+
+| TATA   |
+| BMW    |
+| Volva  |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> update carrent set cost=20000 where carcom=TATA;
+ERROR 1054 (42S22): Unknown column 'TATA' in 'where clause'
+mysql> update carrent set cost=20000 where carcom='TATA';
+ERROR 1054 (42S22): Unknown column 'cost' in 'field list'
+mysql> update carrent set rentcost=20000 where carcom='TATA';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from carrent;
++-------+--------+-------+----------+
+| carno | carcom | color | rentcost |
++-------+--------+-------+----------+
+|  2432 | TATA   | Black |    20000 |
+|  7222 | BMW    | White |    15000 |
+|  6392 | Volva  | Red   |    17000 |
++-------+--------+-------+----------+
+3 rows in set (0.01 sec)
+
+mysql> delete from carrent where rentcost=17000;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from carrent;
++-------+--------+-------+----------+
+| carno | carcom | color | rentcost |
++-------+--------+-------+----------+
+|  2432 | TATA   | Black |    20000 |
+|  7222 | BMW    | White |    15000 |
++-------+--------+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql>
