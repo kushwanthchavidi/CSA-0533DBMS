@@ -1,0 +1,204 @@
+# CSA-0533DBMS
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database school;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use school;
+Database changed
+mysql> create table school(regno int(4),name varchar(20),standered int(2),city varchar(22));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc school;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| regno     | int(4)      | YES  |     | NULL    |       |
+| name      | varchar(20) | YES  |     | NULL    |       |
+| standered | int(2)      | YES  |     | NULL    |       |
+| city      | varchar(22) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql> insert into school values(303,'ram',9,'tpt')
+    -> insert into school values(303,'ram',9,'tpt');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into school values(303,'ram',9,'tpt')' at line 2
+mysql> insert into school values (303,'ram',9,'tpt');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into school values (308,'sam',10,'mum');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into school values (357,'sita',8,'chen');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into school values (374,'bala',11,'delhi');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into school values (411,'veera',12,'ooty');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from school;
++-------+-------+-----------+-------+
+| regno | name  | standered | city  |
++-------+-------+-----------+-------+
+|   303 | ram   |         9 | tpt   |
+|   308 | sam   |        10 | mum   |
+|   357 | sita  |         8 | chen  |
+|   374 | bala  |        11 | delhi |
+|   411 | veera |        12 | ooty  |
++-------+-------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select name,city from school by regno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by regno' at line 1
+mysql> select name,city from school group by regno;
++-------+-------+
+| name  | city  |
++-------+-------+
+| ram   | tpt   |
+| sam   | mum   |
+| sita  | chen  |
+| bala  | delhi |
+| veera | ooty  |
++-------+-------+
+5 rows in set (0.02 sec)
+
+mysql> select name,city from school group by regno=374;
++------+-------+
+| name | city  |
++------+-------+
+| ram  | tpt   |
+| bala | delhi |
++------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select name,city from school group by regno=411;
++-------+------+
+| name  | city |
++-------+------+
+| ram   | tpt  |
+| veera | ooty |
++-------+------+
+2 rows in set (0.00 sec)
+
+mysql> select name,city from school group by regno=303;
++------+------+
+| name | city |
++------+------+
+| sam  | mum  |
+| ram  | tpt  |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> select name,city from school group by name;
++-------+-------+
+| name  | city  |
++-------+-------+
+| bala  | delhi |
+| ram   | tpt   |
+| sam   | mum   |
+| sita  | chen  |
+| veera | ooty  |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select name,city from school group by name=ram;
+ERROR 1054 (42S22): Unknown column 'ram' in 'group statement'
+mysql> select name,city from school group by city;
++-------+-------+
+| name  | city  |
++-------+-------+
+| sita  | chen  |
+| bala  | delhi |
+| sam   | mum   |
+| veera | ooty  |
+| ram   | tpt   |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select name,standered from school group by city;
++-------+-----------+
+| name  | standered |
++-------+-----------+
+| sita  |         8 |
+| bala  |        11 |
+| sam   |        10 |
+| veera |        12 |
+| ram   |         9 |
++-------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select standered from school group by city;
++-----------+
+| standered |
++-----------+
+|         8 |
+|        11 |
+|        10 |
+|        12 |
+|         9 |
++-----------+
+5 rows in set (0.00 sec)
+
+mysql> select name,standered from school group by regno;
++-------+-----------+
+| name  | standered |
++-------+-----------+
+| ram   |         9 |
+| sam   |        10 |
+| sita  |         8 |
+| bala  |        11 |
+| veera |        12 |
++-------+-----------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> select name,standered from school group by regno=303;
++------+-----------+
+| name | standered |
++------+-----------+
+| sam  |        10 |
+| ram  |         9 |
++------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from school order by city;
++-------+-------+-----------+-------+
+| regno | name  | standered | city  |
++-------+-------+-----------+-------+
+|   357 | sita  |         8 | chen  |
+|   374 | bala  |        11 | delhi |
+|   308 | sam   |        10 | mum   |
+|   411 | veera |        12 | ooty  |
+|   303 | ram   |         9 | tpt   |
++-------+-------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from school order by standered;;
++-------+-------+-----------+-------+
+| regno | name  | standered | city  |
++-------+-------+-----------+-------+
+|   357 | sita  |         8 | chen  |
+|   303 | ram   |         9 | tpt   |
+|   308 | sam   |        10 | mum   |
+|   374 | bala  |        11 | delhi |
+|   411 | veera |        12 | ooty  |
++-------+-------+-----------+-------+
+5 rows in set (0.00 sec)
+
+ERROR:
+No query specified
+
+mysql>
