@@ -1,0 +1,102 @@
+# CSA-0533DBMS
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use generalhospital;
+Database changed
+mysql> desc hospital;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| idno  | int(7)      | YES  |     | NULL    |       |
+| name  | varchar(22) | YES  |     | NULL    |       |
+| age   | int(3)      | YES  |     | NULL    |       |
+| sex   | varchar(7)  | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into hospital values (287,'ram',58,'male');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital values (333,'sita',75,'female');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital values (543,'ravi',44,'male');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital values (722,'priya',18,'female');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from hospital;
++------+-------+------+--------+
+| idno | name  | age  | sex    |
++------+-------+------+--------+
+|  284 | ram   |   55 | male   |
+|  333 | sita  |   74 | female |
+|  287 | ram   |   58 | male   |
+|  333 | sita  |   75 | female |
+|  543 | ravi  |   44 | male   |
+|  722 | priya |   18 | female |
++------+-------+------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select age from hospital;
++------+
+| age  |
++------+
+|   55 |
+|   74 |
+|   58 |
+|   75 |
+|   44 |
+|   18 |
++------+
+6 rows in set (0.00 sec)
+
+mysql> update hospital set name='siva' where age=55;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update hospital set name='sam' where age=74;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from hospital;
++------+-------+------+--------+
+| idno | name  | age  | sex    |
++------+-------+------+--------+
+|  284 | siva  |   55 | male   |
+|  333 | sam   |   74 | female |
+|  287 | ram   |   58 | male   |
+|  333 | sita  |   75 | female |
+|  543 | ravi  |   44 | male   |
+|  722 | priya |   18 | female |
++------+-------+------+--------+
+6 rows in set (0.00 sec)
+
+mysql> delete from hospital where age=74;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from hospital;
++------+-------+------+--------+
+| idno | name  | age  | sex    |
++------+-------+------+--------+
+|  284 | siva  |   55 | male   |
+|  287 | ram   |   58 | male   |
+|  333 | sita  |   75 | female |
+|  543 | ravi  |   44 | male   |
+|  722 | priya |   18 | female |
++------+-------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql>
